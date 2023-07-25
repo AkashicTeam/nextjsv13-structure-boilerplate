@@ -1,13 +1,13 @@
 'use client'
 
-import { decrement, increment, reset } from '~/store/features/counter/counterSlide'
+import { decrement, increment, reset } from '~/store/features/counter/counterReducer'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { useGetUsersQuery } from '~/store/services/userApi'
-
+import Image from 'next/image'
 export default function Home() {
     const { isLoading, isFetching, data, error } = useGetUsersQuery(null)
 
-    const count = useAppSelector((state) => state.counterSlide.value)
+    const count = useAppSelector((state) => state.counterReducer.value)
     const dispatch = useAppDispatch()
 
     return (
@@ -35,10 +35,11 @@ export default function Home() {
                 >
                     {data.map((user) => (
                         <div key={user.id} style={{ border: '1px solid #ccc', textAlign: 'center' }}>
-                            <img
-                                src={`https://robohash.org/${user.id}?set=set2&size=180x180`}
+                            <Image
                                 alt={user.name}
-                                style={{ height: 180, width: 180 }}
+                                width={200}
+                                height={200}
+                                src={`https://robohash.org/${user.id}?set=set2&size=180x180`}
                             />
                             <h3>{user.name}</h3>
                         </div>

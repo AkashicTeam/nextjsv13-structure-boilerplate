@@ -2,10 +2,10 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        unoptimized: true,
+        unoptimized: true
     },
     nextScriptWorkers: true,
-    output: "export",
-};
+    output: 'export'
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
