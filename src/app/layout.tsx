@@ -1,6 +1,12 @@
+'use client'
 import type { Metadata } from 'next'
 import { GlobalProvider } from '~/context'
 import { Providers } from '~/store/provider'
+import { Providers as ThemeProvider } from '~/theme/provider'
+import { SnackbarProvider } from 'notistack'
+import { SnackbarConfig } from '~/config'
+import { Provider } from 'react-redux'
+import { store } from '~/store'
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -11,9 +17,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang='en'>
             <body>
-                <GlobalProvider>
-                    <Providers>{children}</Providers>
-                </GlobalProvider>
+                <Provider store={store}>
+                    <GlobalProvider>
+                        <ThemeProvider>
+                            <SnackbarProvider {...SnackbarConfig}>
+                                <Providers>{children}</Providers>
+                            </SnackbarProvider>
+                        </ThemeProvider>
+                    </GlobalProvider>
+                </Provider>
             </body>
         </html>
     )
